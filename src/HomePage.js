@@ -33,8 +33,8 @@ class HomePage extends Component {
 
 handleSubmit = e => {
     e.preventDefault();
-    if (this.state.image_url.length == 0 || this.state.image_key.length == 0) {
-        this.setState({ error_flag: true, msg: 'please input image url or key' })
+    if (this.state.image_url.length == 0 ) {
+        this.setState({ error_flag: true, msg: 'please input image url ' })
         return;
     }
     if (this.state.image_url.includes('/p/')) {
@@ -55,10 +55,9 @@ handleSubmit = e => {
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: this.state.image_url, key: this.state.image_key })
+        body: JSON.stringify({ url: this.state.image_url })
     };
     let url = config.enpoint + '?apikey=' + config.apikey + "&&syn=false"
-    console.log('url=' + url)
     fetch(url, requestOptions)
         .then(async response => {
             console.log(response)
@@ -112,7 +111,7 @@ render() {
                         />
                     </Form.Group>
 
-                    <Form.Group>
+                    {/* <Form.Group>
                         <Form.Label>Image Key</Form.Label>
                         <Input placeholder="please input image key"
                             value={this.state.image_key}
@@ -120,7 +119,7 @@ render() {
                                 this.setState({ error_flag: false, image_key: e.target.value })
                             }}
                         />
-                    </Form.Group>
+                    </Form.Group> */}
                     <br />
                     <Button variant="primary" type="submit" onClick={this.handleSubmit} >
                         Submit
